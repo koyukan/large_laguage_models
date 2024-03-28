@@ -28,15 +28,26 @@ def get_task_status(task_id):
 
 
 def main():
-    prompt = input("Enter the prompt: ")
-
-    task_id = generate_text(prompt)
+    # Create a while loop to keep asking for prompts 
+    # and displaying the generated text until the user exits
     while True:
-        status = get_task_status(task_id)
-        if "Task not completed yet" not in status:
-            print(status)
+        # Get the prompt from the user
+        prompt = input("Enter the prompt: ")
+
+        # Generate the text using the prompt
+        task_id = generate_text(prompt)
+        while True:
+            status = get_task_status(task_id)
+            if "Task not completed yet" not in status:
+                print(status)
+                break
+            time.sleep(2)
+
+        # Ask the user if they want to continue
+        continue_prompt = input("Do you want to continue? (y/n): ")
+        if continue_prompt.lower() != "y":
             break
-        time.sleep(2)
+
 
 
 if __name__ == "__main__":

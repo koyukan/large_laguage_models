@@ -32,5 +32,6 @@ def memory_decorator(func):
 def generate_output(prompt: str, model: AutoModelForCausalLM, tokenizer: AutoTokenizer) -> torch.Tensor:
     input_ids = tokenizer(prompt, return_tensors="pt").input_ids
     input_ids = input_ids.to("cuda")
-    outputs = model.generate(input_ids, max_length=500)
+    outputs = model.generate(input_ids, temperature=0.7, do_sample=True, top_p=0.95, top_k=40, max_new_tokens=512)
+    # Replaced the params according to the model's config
     return outputs

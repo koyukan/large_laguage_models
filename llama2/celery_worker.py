@@ -1,17 +1,19 @@
+
 from celery import Celery, signals
 from utils import generate_output
 from model_loader import ModelLoader
 
 
 def make_celery(app_name=__name__):
-    backend = broker = 'redis://llama2_redis_1:6379/0'
+    backend = broker = 'redis://redis:6379/0'
     return Celery(app_name, backend=backend, broker=broker)
 
 
 celery = make_celery()
 
 model_loader = None
-model_path = "meta-llama/Llama-2-7b-chat-hf"
+# Change the model path to the model you want to use
+model_path = "TheBloke/Llama-2-7B-Chat-GPTQ"
 
 
 @signals.worker_process_init.connect

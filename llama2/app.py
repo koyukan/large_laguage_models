@@ -25,8 +25,8 @@ async def get_task(task_id: str) -> Any:
     result = AsyncResult(task_id)
     if result.ready():
         res = result.get()
-        return {"result": res[0],
-                "time": res[1],
-                "memory": res[2]}
+        # The order of time and memory is swapped in the return statement
+        return {"result": res[0], "time": res[2], "memory": res[1]}
+
     else:
         return {"status": "Task not completed yet"}
